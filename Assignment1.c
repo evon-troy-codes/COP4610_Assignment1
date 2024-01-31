@@ -7,6 +7,40 @@
 
 int main()
 {
+    // Variable declarations
+    int sum_factor, num;
+
+    // Function to determine the sum of the factors of a number
+    int factorial(int sum_factor)
+    {
+        int i, sum = 0;
+        for (i = 1; i <= sum_factor; i++)
+        {
+            if (sum_factor % i == 0)
+            {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+
+    // Function to determine if a number is prime
+    int prime(int num)
+    {
+        // In the initial loop we'll check to see if the number is 1 or 2
+        if (num < 2)
+        {
+            return 0; // Not a prime number
+        }
+        for (int i = 2; i < num; i++)
+        {
+            if (num % i == 0)
+            {
+                return 0; // Not a prime number
+            }
+        }
+    }
+
     pid_t child_pid;
 
     // Fork a new process
