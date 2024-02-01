@@ -14,18 +14,19 @@ int main()
     int num;
 
     // Here we'll prompt the user to enter a number
-    printf("How many child processes would you like to create? Please enter a number between 1 and 5: ");
+    printf("How many child processes would you like to create? Please enter a number up to 5: ");
     scanf("%d", &num);
 
-    // If the number is < 1 or > 5, we'll prompt the user to enter a valid number
-    while (num < 1 || num > 5)
+    // If the number is > 5, we'll prompt the user to enter a valid number
+    while (num > 5)
     {
-        printf("Invalid entry. Please enter a number between 1 and 5: ");
+        printf("Invalid entry. Child processes cannot exceed 5: ");
         scanf("%d", &num);
     }
     // User is notified of the number of child processes to be created
     printf("Parent process (PID: %d) will create %d child processes per the users request.", getpid(), num);
 
+    // Here we declare the child_pid variable
     pid_t child_pid;
 
     // Fork a new process
@@ -91,5 +92,52 @@ int main()
     //         }
     //     }
     //     return 1; // Prime number
+    // }
+
+    // Function to determine if palindrome
+    // int is_palindrome(int num)
+    // {
+    //     int reversed_num = 0, remainder, original_num;
+    //     original_num = num;
+    //     while (num != 0)
+    //     {
+    //         remainder = num % 10;
+    //         reversed_num = reversed_num * 10 + remainder;
+    //         num /= 10;
+    //     }
+    //     if (original_num == reversed_num)
+    //     {
+    //         return 1; // Palindrome
+    //     }
+    //     else
+    //     {
+    //         return 0; // Not a palindrome
+    //     }
+    // }
+    // Function to calculate the square root
+    // int square_root(int num)
+    // {
+    //     int i;
+    //     for (i = 1; i <= num; i++)
+    //     {
+    //         if (i * i == num)
+    //         {
+    //             return i;
+    //         }
+    //     }
+    //     return 0;
+    // }
+    // Function to determine if a number is a perfect square
+    // int is_perfect_square(int num)
+    // {
+    //     int i;
+    //     for (i = 1; i <= num; i++)
+    //     {
+    //         if (i * i == num)
+    //         {
+    //             return 1; // Perfect square
+    //         }
+    //     }
+    //     return 0; // Not a perfect square
     // }
 }
