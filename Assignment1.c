@@ -24,7 +24,7 @@ int main()
         scanf("%d", &num);
     }
     // User is notified of the number of child processes to be created
-    printf("Parent process (PID: %d) will create %d child processes per the users request.", getpid());
+    printf("Parent process (PID: %d) will create %d child processes per the users request.", getpid(), num);
 
     pid_t child_pid;
 
