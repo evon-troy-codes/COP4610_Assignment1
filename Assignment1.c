@@ -7,8 +7,6 @@
 
 int main()
 {
-    // Variable declarations
-    int sum_factor, num;
 
     // Function to determine the sum of the factors of a number
     int factorial(int sum_factor)
@@ -25,7 +23,7 @@ int main()
     }
 
     // Function to determine if a number is prime
-    int prime(int num)
+    int is_prime_num(int num)
     {
         // In the initial loop we'll check to see if the number is 1 or 2
         if (num < 2)
@@ -44,6 +42,8 @@ int main()
 
     int main()
     {
+        // Variable declarations
+        int sum_factor, num;
     }
 
     pid_t child_pid;
