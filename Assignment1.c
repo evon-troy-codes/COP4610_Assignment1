@@ -1,4 +1,4 @@
-//  Group Members: Samira Masri () & Evon Troy Alexander (1945955)
+//  Group Members: Samira Masri (6390566) & Evon Troy Alexander (1945955)
 //  This program simulates a parallel task execution scenario using process forking.
 //  The user will be prompted to enter a number between 1 and 5 (child processes to be created).
 //  Each child process will perform a unique task and the parent process will wait for all child processes to finish before it finishes.
