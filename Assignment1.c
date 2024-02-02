@@ -22,7 +22,7 @@ int main()
     int num;
 
     // Here we'll prompt the user to enter a number
-    printf("How many child processes would you like to create? Please enter a number up to 5: ");
+    printf("Enter the number of child processes to create: ");
     scanf("%d", &num);
 
     // If the number is > 0 AND < 5, we'll prompt the user to enter a valid number
@@ -32,17 +32,17 @@ int main()
         scanf("%d", &num);
     }
     // User is notified of the number of child processes to be created
-    printf("Parent process (PID: %d) will create %d child processes per the user's request.", getpid(), num);
+    printf("Parent process (PID: %d) is creating %d child processes.\n", getpid(), num);
 
-    // Here we declare the child_pid variable
-    pid_t child_pid;
+    // // Here we declare the child_pid variable
+    // pid_t child_pid;
 
     // We need to iterate through the number of child processes to be created
     for (int i = 1; i <= num; i++)
     {
 
-        // Fork a new process
-        child_pid = fork();
+        // Declare the child_pid variable and fork a new process
+        pid_t child_pid = fork();
 
         if (child_pid < 0)
         {
@@ -51,19 +51,27 @@ int main()
         }
         else if (child_pid == 0)
         {
-            // This code will be executed by the child process
-            printf("Child %d (PID: %d) is conducting a unique task\n", i, getpid());
 
-            // Here we'll use the switch statement to determine the task to be performed by the child process
+            // Here we'll use the switch case statement to determine the task to be performed by the child process
             switch (i)
             {
             case 1:
                 printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
-                printf("Child %d completed it's task. Result: %d\n", i, factorial(5));
+                int result1 = factorial(5);
+                printf("Child %d completed it's task. Result: %d\n", i, getpid(), result1);
                 break;
             case 2:
                 printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
-                printf("Child %d completed its task. Result: %s\n", i, is_prime_num(20) ? "Prime" : "Not Prime");
+                printf("Child %d (PID: %d) completed its task. Result: ", i, getpid());
+                // Iterate through 1 to 20 to check if prime
+                for (int j = 1; j <= 20; j++)
+                {
+                    if (is_prime_num(j))
+                    {
+                        printf("%d ", j);
+                    }
+                }
+                printf("\n");
                 break;
             case 3:
                 printf("Child %d (PID: %d) is determining if 121 is a palindrome.\n", i, getpid());
@@ -71,7 +79,8 @@ int main()
                 break;
             case 4:
                 printf("Child %d (PID: %d) is calculating the square root of 30.\n", i, getpid());
-                printf("Child %d completed its task. Result: %d\n", i, square_root(30));
+                int result4 = square_root(30);
+                printf("Child %d completed its task. Result: %d\n", i, getpid(), result4);
                 break;
             case 5:
                 printf("Child %d (PID: %d) is determining if 100 is a perfect square.\n", i, getpid());
@@ -107,12 +116,12 @@ int main()
 // Function to calculate the factorial of a number
 int factorial(int sum_factor)
 {
-    int i, sum = 0;
+    int i, sum = 1;
     for (i = 1; i <= sum_factor; i++)
     {
         if (sum_factor % i == 0)
         {
-            sum += i;
+            sum *= i;
         }
     }
     return sum;
@@ -126,7 +135,7 @@ int is_prime_num(int num)
     {
         return 0; // Not a prime number
     }
-    for (int i = 2; i < num; i++)
+    for (int i = 2; i <= num / 2; i++)
     {
         if (num % i == 0)
         {
