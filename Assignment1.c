@@ -82,7 +82,7 @@ int main()
                 break;
             case 2:
                 printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
-                printf("Child %d (PID: %d) completed its task. Result: ", i, getpid());
+                printf("Child %d completed its task. Result: ", i);
                 print_prime_numbers();
                 printf("\n");
                 break;
@@ -110,16 +110,17 @@ int main()
         {
             // This code will be executed by the parent process
             printf("Parent: Child process created with PID %d\n", child_pid);
-            // Wait for the child process to finish
-            wait(NULL);
-            printf("Parent: Child process finished\n");
         }
     }
-    // Execute a new program using execl
-    execl("/bin/ls", "ls", "-l", NULL);
-    // If execl fails, this code will be reached
-    perror("Execl failed");
-    exit(EXIT_FAILURE);
+    // Wait for all child processes to finish
+    for (int i = 1; i <= num; i++)
+    {
+        wait(NULL);
+        printf("Parent: Child process %d finished.\n", i);
+    }
+
+    // Display the final parent message
+    printf("\nAll child processes have completed. Parent (PID: %d) is displaying the final message.\n", getpid());
 
     return 0;
 }
