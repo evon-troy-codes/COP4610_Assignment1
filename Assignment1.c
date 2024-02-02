@@ -29,6 +29,12 @@ int main()
     // Here we declare the child_pid variable
     pid_t child_pid;
 
+    // We need to iterate through the number of child processes to be created
+    for (int i = 1; i <= num; i++)
+    {
+        wait(NULL);
+    }
+
     // Fork a new process
     child_pid = fork();
 
@@ -40,106 +46,136 @@ int main()
     else if (child_pid == 0)
     {
         // This code will be executed by the child process
+        printf("Child %d (PID: %d) is conducting a unique task\n", i, getpid());
 
-        // Execute a new program using execl
-        execl("/bin/ls", "ls", "-l", NULL);
-
-        // If execl fails, this code will be reached
-        perror("Execl failed");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        // This code will be executed by the parent process
-
-        printf("Parent: Child process created with PID %d\n", child_pid);
-
-        // Wait for the child process to finish
-        wait(NULL);
-
-        printf("Parent: Child process finished\n");
-    }
-
-    return 0;
-
-    // Function definitions
-
-    // Function to calculate the factorial of a number
-    int factorial(int sum_factor)
-    {
-        int i, sum = 0;
-        for (i = 1; i <= sum_factor; i++)
+        // Here we'll use the switch statement to determine the task to be performed by the child process
+        switch (i)
         {
-            if (sum_factor % i == 0)
-            {
-                sum += i;
-            }
+        case 1:
+            printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
+            printf("The factorial of 5 is: %d\n", factorial(5));
+            break;
+        case 2:
+            printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
+            printf("The results of the operation is: %d\n", is_prime_num(20));
+            break;
+        case 3:
+            printf();
+            printf();
+            break;
+        case 4:
+            printf();
+            printf();
+            break;
+        case 5:
+            printf();
+            printf();
+            break;
+        default:
+            printf("Invalid entry. Please enter a number between 1 and 5.\n");
+            break;
         }
-        return sum;
+        exit(EXIT_SUCCESS);
     }
 
-    // Function to determine if a number is prime
-    int is_prime_num(int num)
+    // Execute a new program using execl
+    execl("/bin/ls", "ls", "-l", NULL);
+
+    // If execl fails, this code will be reached
+    perror("Execl failed");
+    exit(EXIT_FAILURE);
+}
+else
+{
+    // This code will be executed by the parent process
+
+    printf("Parent: Child process created with PID %d\n", child_pid);
+
+    // Wait for the child process to finish
+    wait(NULL);
+
+    printf("Parent: Child process finished\n");
+}
+
+return 0;
+
+// Function definitions
+
+// Function to calculate the factorial of a number
+int factorial(int sum_factor)
+{
+    int i, sum = 0;
+    for (i = 1; i <= sum_factor; i++)
     {
-        // In the initial loop we'll check to see if the number is 1 or 2
-        if (num < 2)
+        if (sum_factor % i == 0)
+        {
+            sum += i;
+        }
+    }
+    return sum;
+}
+
+// Function to determine if a number is prime
+int is_prime_num(int num)
+{
+    // In the initial loop we'll check to see if the number is 1 or 2
+    if (num < 2)
+    {
+        return 0; // Not a prime number
+    }
+    for (int i = 2; i < num; i++)
+    {
+        if (num % i == 0)
         {
             return 0; // Not a prime number
         }
-        for (int i = 2; i < num; i++)
-        {
-            if (num % i == 0)
-            {
-                return 0; // Not a prime number
-            }
-        }
-        return 1; // Prime number
     }
+    return 1; // Prime number
+}
 
-    // Function to determine if palindrome
-    int is_palindrome(int num)
+// Function to determine if palindrome
+int is_palindrome(int num)
+{
+    int reversed_num = 0, remainder, original_num;
+    original_num = num;
+    while (num != 0)
     {
-        int reversed_num = 0, remainder, original_num;
-        original_num = num;
-        while (num != 0)
+        remainder = num % 10;
+        reversed_num = reversed_num * 10 + remainder;
+        num /= 10;
+    }
+    if (original_num == reversed_num)
+    {
+        return 1; // Palindrome
+    }
+    else
+    {
+        return 0; // Not a palindrome
+    }
+}
+// Function to calculate the square root
+int square_root(int num)
+{
+    int i;
+    for (i = 1; i <= num; i++)
+    {
+        if (i * i == num)
         {
-            remainder = num % 10;
-            reversed_num = reversed_num * 10 + remainder;
-            num /= 10;
-        }
-        if (original_num == reversed_num)
-        {
-            return 1; // Palindrome
-        }
-        else
-        {
-            return 0; // Not a palindrome
+            return i;
         }
     }
-    // Function to calculate the square root
-    int square_root(int num)
+    return 0;
+}
+// Function to determine if a number is a perfect square
+int is_perfect_square(int num)
+{
+    int i;
+    for (i = 1; i <= num; i++)
     {
-        int i;
-        for (i = 1; i <= num; i++)
+        if (i * i == num)
         {
-            if (i * i == num)
-            {
-                return i;
-            }
+            return 1; // Perfect square
         }
-        return 0;
     }
-    // Function to determine if a number is a perfect square
-    int is_perfect_square(int num)
-    {
-        int i;
-        for (i = 1; i <= num; i++)
-        {
-            if (i * i == num)
-            {
-                return 1; // Perfect square
-            }
-        }
-        return 0; // Not a perfect square
-    }
+    return 0; // Not a perfect square
 }
