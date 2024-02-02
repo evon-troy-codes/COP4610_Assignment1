@@ -9,6 +9,13 @@
 #include <sys/wait.h>
 #include <stdbool.h>
 
+// Function prototypes
+int factorial(int sum_factor);
+int is_prime_num(int num);
+bool is_palindrome(int num);
+int square_root(int num);
+bool is_perfect_square(int num);
+
 int main()
 {
     // Variable declaration
@@ -25,7 +32,7 @@ int main()
         scanf("%d", &num);
     }
     // User is notified of the number of child processes to be created
-    printf("Parent process (PID: %d) will create %d child processes per the users request.", getpid(), num);
+    printf("Parent process (PID: %d) will create %d child processes per the user's request.", getpid(), num);
 
     // Here we declare the child_pid variable
     pid_t child_pid;
@@ -33,72 +40,67 @@ int main()
     // We need to iterate through the number of child processes to be created
     for (int i = 1; i <= num; i++)
     {
-        wait(NULL);
-    }
 
-    // Fork a new process
-    child_pid = fork();
+        // Fork a new process
+        child_pid = fork();
 
-    if (child_pid < 0)
-    {
-        perror("Fork failed");
-        exit(EXIT_FAILURE);
-    }
-    else if (child_pid == 0)
-    {
-        // This code will be executed by the child process
-        printf("Child %d (PID: %d) is conducting a unique task\n", i, getpid());
-
-        // Here we'll use the switch statement to determine the task to be performed by the child process
-        switch (i)
+        if (child_pid < 0)
         {
-        case 1:
-            printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
-            printf("Child %d completed it's task. Result: %d\n", i, factorial(5));
-            break;
-        case 2:
-            printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
-            printf("Child %d completed its task. Result: %d\n", i, is_prime_num(20) ? "Prime" : "Not Prime");
-            break;
-        case 3:
-            printf("Child %d (PID: %d) is determining if 121 is a palindrome.\n", i, getpid());
-            printf();
-            break;
-        case 4:
-            printf();
-            printf();
-            break;
-        case 5:
-            printf();
-            printf();
-            break;
-        default:
-            printf("Invalid entry. Please enter a number between 1 and 5.\n");
-            break;
+            perror("Fork failed");
+            exit(EXIT_FAILURE);
         }
-        exit(EXIT_SUCCESS);
-    }
+        else if (child_pid == 0)
+        {
+            // This code will be executed by the child process
+            printf("Child %d (PID: %d) is conducting a unique task\n", i, getpid());
 
+            // Here we'll use the switch statement to determine the task to be performed by the child process
+            switch (i)
+            {
+            case 1:
+                printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
+                printf("Child %d completed it's task. Result: %d\n", i, factorial(5));
+                break;
+            case 2:
+                printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
+                printf("Child %d completed its task. Result: %s\n", i, is_prime_num(20) ? "Prime" : "Not Prime");
+                break;
+            case 3:
+                printf("Child %d (PID: %d) is determining if 121 is a palindrome.\n", i, getpid());
+                printf("Child %d completed its task. Result: %s\n", i, is_palindrome(121) ? "Palindrome" : "Not Palindrome");
+                break;
+            case 4:
+                printf("Child %d (PID: %d) is calculating the square root of 30.\n", i, getpid());
+                printf("Child %d completed its task. Result: %d\n", i, square_root(30));
+                break;
+            case 5:
+                printf("Child %d (PID: %d) is determining if 100 is a perfect square.\n", i, getpid());
+                printf("Child %d completed its task. Result: %s\n", i, is_perfect_square(100) ? "Perfect Square" : "Not Perfect Square");
+                break;
+            default:
+                printf("Invalid entry. Please enter a number between 1 and 5.\n");
+                break;
+            }
+            // Child process exits
+            exit(EXIT_SUCCESS);
+        }
+        else
+        {
+            // This code will be executed by the parent process
+            printf("Parent: Child process created with PID %d\n", child_pid);
+            // Wait for the child process to finish
+            wait(NULL);
+            printf("Parent: Child process finished\n");
+        }
+    }
     // Execute a new program using execl
     execl("/bin/ls", "ls", "-l", NULL);
-
     // If execl fails, this code will be reached
     perror("Execl failed");
     exit(EXIT_FAILURE);
+
+    return 0;
 }
-else
-{
-    // This code will be executed by the parent process
-
-    printf("Parent: Child process created with PID %d\n", child_pid);
-
-    // Wait for the child process to finish
-    wait(NULL);
-
-    printf("Parent: Child process finished\n");
-}
-
-return 0;
 
 // Function definitions
 
@@ -161,15 +163,15 @@ int square_root(int num)
     return 0;
 }
 // Function to determine if a number is a perfect square
-int is_perfect_square(int num)
+bool is_perfect_square(int num)
 {
     int i;
     for (i = 1; i <= num; i++)
     {
         if (i * i == num)
         {
-            return 1; // Perfect square
+            return true; // Perfect square
         }
     }
-    return 0; // Not a perfect square
+    return false; // Not a perfect square
 }

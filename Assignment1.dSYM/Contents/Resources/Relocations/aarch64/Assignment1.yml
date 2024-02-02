@@ -2,6 +2,11 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/evon_codes/Desktop/COP4610_Assignment1/Assignment1'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003C64, symSize: 0x18C }
-  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003C64, symSize: 0x18C }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003430, symSize: 0x488 }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003430, symSize: 0x488 }
+  - { offsetInCU: 0x93, offset: 0x93, size: 0x8, addend: 0x0, symName: _factorial, symObjAddr: 0x49C, symBinAddr: 0x1000038CC, symSize: 0x88 }
+  - { offsetInCU: 0xD7, offset: 0xD7, size: 0x8, addend: 0x0, symName: _is_prime_num, symObjAddr: 0x524, symBinAddr: 0x100003954, symSize: 0xA0 }
+  - { offsetInCU: 0x11B, offset: 0x11B, size: 0x8, addend: 0x0, symName: _is_palindrome, symObjAddr: 0x5C4, symBinAddr: 0x1000039F4, symSize: 0x84 }
+  - { offsetInCU: 0x16D, offset: 0x16D, size: 0x8, addend: 0x0, symName: _square_root, symObjAddr: 0x648, symBinAddr: 0x100003A78, symSize: 0x80 }
+  - { offsetInCU: 0x1A3, offset: 0x1A3, size: 0x8, addend: 0x0, symName: _is_perfect_square, symObjAddr: 0x6C8, symBinAddr: 0x100003AF8, symSize: 0x98 }
 ...
