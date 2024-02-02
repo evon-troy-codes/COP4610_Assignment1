@@ -8,10 +8,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdbool.h>
+#include <math.h>
 
 // Function prototypes
 int factorial(int sum_factor);
 int is_prime_num(int num);
+void print_prime_numbers();
 bool is_palindrome(int num);
 int square_root(int num);
 bool is_perfect_square(int num);
@@ -63,14 +65,7 @@ int main()
             case 2:
                 printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
                 printf("Child %d (PID: %d) completed its task. Result: ", i, getpid());
-                // Iterate through 1 to 20 to check if prime
-                for (int j = 1; j <= 20; j++)
-                {
-                    if (is_prime_num(j))
-                    {
-                        printf("%d ", j);
-                    }
-                }
+                print_prime_numbers();
                 printf("\n");
                 break;
             case 3:
@@ -127,14 +122,16 @@ int factorial(int sum_factor)
     return sum;
 }
 
-// Function to determine if a number is prime
+// Function to print prime numbers up to 20
 int is_prime_num(int num)
 {
-    // In the initial loop we'll check to see if the number is 1 or 2
     if (num < 2)
     {
         return 0; // Not a prime number
     }
+
+    int sqrt_num = sqrt(num);
+
     for (int i = 2; i <= num / 2; i++)
     {
         if (num % i == 0)
@@ -143,6 +140,20 @@ int is_prime_num(int num)
         }
     }
     return 1; // Prime number
+}
+
+// Created a fucntion to print prime numbers up to 20 to clean up the case statement
+void print_prime_numbers()
+{
+    printf("Prime numbers up to 20: ");
+    for (int j = 2; j <= 20; j++)
+    {
+        if (is_prime_num(j))
+        {
+            printf("%d ", j);
+        }
+    }
+    printf("\n");
 }
 
 // Function to determine if palindrome
