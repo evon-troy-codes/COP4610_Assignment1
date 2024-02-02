@@ -78,7 +78,7 @@ int main()
             case 1:
                 printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
                 int result1 = factorial(5);
-                printf("Child %d completed it's task. Result: %d\n", i, getpid(), result1);
+                printf("Child %d completed it's task. Result: %d\n", i, result1);
                 break;
             case 2:
                 printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
@@ -127,17 +127,14 @@ int main()
 // Function definitions
 
 // Function to calculate the factorial of a number
-int factorial(int sum_factor)
+int factorial(int num)
 {
-    int i, sum = 1;
-    for (i = 1; i <= sum_factor; i++)
+    int i, result = 1;
+    for (i = 1; i <= num; i++)
     {
-        if (sum_factor % i == 0)
-        {
-            sum *= i;
-        }
+        result *= i;
     }
-    return sum;
+    return result;
 }
 
 // Function to print prime numbers up to 20
