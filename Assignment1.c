@@ -27,10 +27,10 @@ int main()
     printf("Enter the number of child processes to create: ");
     scanf("%d", &num);
 
-    // If the number is > 0 AND < 5, we'll prompt the user to enter a valid number
-    while (num < 1 || num > 5)
+    // Ensure that n is between 1 and 4
+    while (num < 1 || num > 4)
     {
-        printf("Invalid entry. Child processes should be in the range of 1-5: ");
+        printf("Invalid entry. Child processes should be in the range of 1-4: ");
         scanf("%d", &num);
     }
     // User is notified of the number of child processes to be created
@@ -82,7 +82,7 @@ int main()
                 printf("Child %d completed its task. Result: %s\n", i, is_perfect_square(100) ? "Perfect Square" : "Not Perfect Square");
                 break;
             default:
-                printf("Invalid entry. Please enter a number between 1 and 5.\n");
+                printf("Invalid entry. Please enter a number between 0 and 4.\n");
                 break;
             }
             // Child process exits
@@ -142,7 +142,7 @@ int is_prime_num(int num)
     return 1; // Prime number
 }
 
-// Created a fucntion to print prime numbers up to 20 to clean up the case statement
+// Created a function to print prime numbers up to 20 to clean up the case statement
 void print_prime_numbers()
 {
     printf("Prime numbers up to 20: ");
