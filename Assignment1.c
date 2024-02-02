@@ -25,13 +25,31 @@ int main()
 
     // Here we'll prompt the user to enter a number
     printf("Enter the number of child processes to create: ");
-    scanf("%d", &num);
 
-    // Ensure that n is between 1 and 4
-    while (num < 1 || num > 4)
+    // Error handling for invalid input
+    while (1)
     {
-        printf("Invalid entry. Child processes should be in the range of 1-4: ");
-        scanf("%d", &num);
+        // Attempt to read an integer from the user
+        if (scanf("%d", &num) != 1)
+        {
+            // If a non integer is entered we clear the buffer
+            while (getchar() != '\n')
+                ;
+
+            // Here we'll ask the user to enter a valid integer
+            printf("Invalid input. Please enter a numeric value: ");
+        }
+        // In the else-if clause we'll check if the number is within the range of 1-4
+        else if (num < 1 || num > 4)
+        {
+            // Prompt the user to enter a valid number within the range
+            printf("Invalid entry. Child processes should be in the range of 1-4: ");
+        }
+        else
+        {
+            // Now that we finally have a valid input we'll exit the loop
+            break;
+        }
     }
     // User is notified of the number of child processes to be created
     printf("Parent process (PID: %d) is creating %d child processes.\n", getpid(), num);
