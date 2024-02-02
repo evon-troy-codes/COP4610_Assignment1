@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdbool.h>
 
 int main()
 {
@@ -53,14 +54,14 @@ int main()
         {
         case 1:
             printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
-            printf("The factorial of 5 is: %d\n", factorial(5));
+            printf("Child %d completed it's task. Result: %d\n", i, factorial(5));
             break;
         case 2:
             printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
-            printf("The results of the operation is: %d\n", is_prime_num(20));
+            printf("Child %d completed its task. Result: %d\n", i, is_prime_num(20) ? "Prime" : "Not Prime");
             break;
         case 3:
-            printf();
+            printf("Child %d (PID: %d) is determining if 121 is a palindrome.\n", i, getpid());
             printf();
             break;
         case 4:
@@ -134,7 +135,7 @@ int is_prime_num(int num)
 }
 
 // Function to determine if palindrome
-int is_palindrome(int num)
+bool is_palindrome(int num)
 {
     int reversed_num = 0, remainder, original_num;
     original_num = num;
@@ -144,14 +145,7 @@ int is_palindrome(int num)
         reversed_num = reversed_num * 10 + remainder;
         num /= 10;
     }
-    if (original_num == reversed_num)
-    {
-        return 1; // Palindrome
-    }
-    else
-    {
-        return 0; // Not a palindrome
-    }
+    return (original_num == reversed_num);
 }
 // Function to calculate the square root
 int square_root(int num)
