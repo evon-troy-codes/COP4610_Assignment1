@@ -20,7 +20,7 @@ bool is_perfect_square(int num);
 
 int main()
 {
-    // Variable declaration
+    // Variable declaration - num will store the number of child processes to be created
     int num;
 
     // Here we'll prompt the user to enter a number
@@ -115,6 +115,7 @@ int main()
 }
 
 // Function definitions
+// Variable declaration - num will store the number of child processes to be created
 
 // Function to calculate the factorial of a number
 unsigned long long factorial(int num)
@@ -154,6 +155,7 @@ int is_prime_num(int num)
 
 // Created a function to print prime numbers up to 20 to clean up the case statement
 void print_prime_numbers()
+// Variable declaration - num will store the number of child processes to be created
 {
     printf("Prime numbers up to 20: ");
     for (int j = 2; j <= 20; j++)
