@@ -92,8 +92,7 @@ int main()
                 break;
             case 4:
                 printf("Child %d (PID: %d) is calculating the square root of 30.\n", i, getpid());
-                int result4 = square_root(30);
-                printf("Child %d completed its task. Result: %d\n", i, getpid(), result4);
+                printf("Child %d completed its task. Result: %f\n", i, square_root(30));
                 break;
             default:
                 printf("Invalid entry. Please enter a number between 0 and 4.\n");
