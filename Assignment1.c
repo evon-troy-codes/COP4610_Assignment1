@@ -11,11 +11,11 @@
 #include <math.h>
 
 // Function prototypes
-int factorial(int sum_factor);
+unsigned long long factorial(int sum_factor);
 int is_prime_num(int num);
 void print_prime_numbers();
 bool is_palindrome(int num);
-int square_root(int num);
+double square_root(int num);
 bool is_perfect_square(int num);
 
 int main()
@@ -54,8 +54,8 @@ int main()
     // User is notified of the number of child processes to be created
     printf("Parent process (PID: %d) is creating %d child processes.\n", getpid(), num);
 
-    // // Here we declare the child_pid variable
-    // pid_t child_pid;
+    // Here we declare the child_pid variable
+    pid_t child_pid;
 
     // We need to iterate through the number of child processes to be created
     for (int i = 1; i <= num; i++)
@@ -76,9 +76,9 @@ int main()
             switch (i)
             {
             case 1:
-                printf("Child %d (PID: %d) is computing the factorial of 5.\n", i, getpid());
-                int result1 = factorial(5);
-                printf("Child %d completed it's task. Result: %d\n", i, result1);
+                printf("Child %d (PID: %d) is computing the factorial of 50.\n", i, getpid());
+                unsigned long long result1 = factorial(50);
+                printf("Child %d completed it's task. Result: %llu\n", i, result1);
                 break;
             case 2:
                 printf("Child %d (PID: %d) is finding prime numbers up to 20.\n", i, getpid());
@@ -95,10 +95,6 @@ int main()
                 int result4 = square_root(30);
                 printf("Child %d completed its task. Result: %d\n", i, getpid(), result4);
                 break;
-            case 5:
-                printf("Child %d (PID: %d) is determining if 100 is a perfect square.\n", i, getpid());
-                printf("Child %d completed its task. Result: %s\n", i, is_perfect_square(100) ? "Perfect Square" : "Not Perfect Square");
-                break;
             default:
                 printf("Invalid entry. Please enter a number between 0 and 4.\n");
                 break;
@@ -106,17 +102,11 @@ int main()
             // Child process exits
             exit(EXIT_SUCCESS);
         }
-        else
-        {
-            // This code will be executed by the parent process
-            printf("Parent: Child process created with PID %d\n", child_pid);
-        }
     }
     // Wait for all child processes to finish
     for (int i = 1; i <= num; i++)
     {
         wait(NULL);
-        printf("Parent: Child process %d finished.\n", i);
     }
 
     // Display the final parent message
@@ -128,10 +118,15 @@ int main()
 // Function definitions
 
 // Function to calculate the factorial of a number
-int factorial(int num)
+unsigned long long factorial(int num)
 {
-    int i, result = 1;
-    for (i = 1; i <= num; i++)
+    if (num < 0)
+    {
+        return -1;
+    }
+
+    unsigned long long result = 1;
+    for (int i = 1; i <= num; i++)
     {
         result *= i;
     }
@@ -186,28 +181,11 @@ bool is_palindrome(int num)
     return (original_num == reversed_num);
 }
 // Function to calculate the square root
-int square_root(int num)
+double square_root(int num)
 {
-    int i;
-    for (i = 1; i <= num; i++)
+    if (num < 0)
     {
-        if (i * i == num)
-        {
-            return i;
-        }
+        return -1;
     }
-    return 0;
-}
-// Function to determine if a number is a perfect square
-bool is_perfect_square(int num)
-{
-    int i;
-    for (i = 1; i <= num; i++)
-    {
-        if (i * i == num)
-        {
-            return true; // Perfect square
-        }
-    }
-    return false; // Not a perfect square
+    return sqrt(num);
 }
